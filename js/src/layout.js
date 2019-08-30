@@ -1,47 +1,46 @@
 // To add navbar
-(() => {
-	// Selecting the navbar
-	const navbar = document.querySelector('.navbar');
+// Selecting the navbar
+const navbar = document.querySelector('nav');
 
-	// Generating links
-	const generateNavItems = () => {
-		const location = window.location.href;
-		const navItems = [
-			{
-				url: 'index.html',
-				label: 'Home'
-			},
-			{
-				url: 'machine-learning.html',
-				label: 'Machine Learning'
-			},
-			{
-				url: 'data-visualisation.html',
-				label: 'Data Visualisation'
-			},
-			{
-				url: 'world-map.html',
-				label: 'World Map'
-			},
-			{
-				url: 'contact-about.html',
-				label: 'Contact Us'
-			}
-		];
+// Generating links
+const generateNavItems = () => {
+	const location = window.location.href;
+	const navItems = [
+		{
+			url: 'index.html',
+			label: 'Home'
+		},
+		{
+			url: 'machine-learning.html',
+			label: 'Machine Learning'
+		},
+		{
+			url: 'data-visualisation.html',
+			label: 'Data Visualisation'
+		},
+		{
+			url: 'world-map.html',
+			label: 'World Map'
+		},
+		{
+			url: 'contact-about.html',
+			label: 'Contact Us'
+		}
+	];
 
-		// Generating links based on the navItems array
-		return navItems.reduce(
-			(navItemsHtml, navItem) =>
-				`${navItemsHtml}<li class="nav-item${
-					location.includes(navItem.url) ? ' active' : ''
-				}"><a href="${navItem.url}" class="nav-link">${navItem.label}</a></li>`,
-			''
-		);
-	};
+	// Generating links based on the navItems array
+	return navItems.reduce(
+		(navItemsHtml, navItem) =>
+			`${navItemsHtml}<li class="nav-item${
+				location.indexOf(navItem.url) !== -1 ? ' active' : ''
+			}"><a href="${navItem.url}" class="nav-link">${navItem.label}</a></li>`,
+		''
+	);
+};
 
-	// Generating the overall HTML of navbar
-	const generateNavbarHtml = () => {
-		const navbarHtml = `<a href="index.html" class="navbar-brand">Data Science</a>
+// Generating the overall HTML of navbar
+const generateNavbarHtml = () => {
+	const navbarHtml = `<a href="index.html" class="navbar-brand">Data Science</a>
 		<button
 			class="navbar-toggler"
 			type="button"
@@ -59,27 +58,30 @@
 			</ul>
 		</div>`;
 
-		return navbarHtml;
-	};
+	return navbarHtml;
+};
 
-	// Adding Bootstrap classes to navbar
-	const addNavbarClasses = () => {
-		const navbarClasses = ['navbar-expand-lg', 'navbar-dark', 'bg-primary'];
-		navbarClasses.forEach(navbarClass => navbar.classList.add(navbarClass));
-	};
+// Adding Bootstrap classes to navbar
+const addNavbarClasses = navbar => {
+	const navbarClasses = [
+		'navbar',
+		'navbar-expand-lg',
+		'navbar-dark',
+		'bg-primary'
+	];
+	navbarClasses.forEach(navbarClass => navbar.classList.add(navbarClass));
+};
 
-	addNavbarClasses();
-	navbar.innerHTML = generateNavbarHtml();
-})();
+addNavbarClasses(navbar);
+navbar.innerHTML = generateNavbarHtml();
 
 // To add footer
-(() => {
-	// Selecting the footer
-	const footer = document.querySelector('.footer');
+// Selecting the footer
+const footer = document.querySelector('footer');
 
-	// To generate footer HTML
-	const generateFooterHtml = () => {
-		return `<div class="row align-items-center">
+// To generate footer HTML
+const generateFooterHtml = () => {
+	return `<div class="row align-items-center">
 				<div class="col-md-6">
 					<a class="footer-link d-inline-block mb-2" href="contact-about.html"
 						>Contact Us</a
@@ -111,14 +113,19 @@
 					</p>
 				</div>
 			</div>`;
-	};
+};
 
-	// To add Bootstrap classes to footer
-	const addFooterClasses = () => {
-		const footerClasses = ['container-fluid', 'p-5', 'bg-dark', 'text-light'];
-		footerClasses.forEach(footerClass => footer.classList.add(footerClass));
-	};
+// To add Bootstrap classes to footer
+const addFooterClasses = footer => {
+	const footerClasses = [
+		'footer',
+		'container-fluid',
+		'p-5',
+		'bg-dark',
+		'text-light'
+	];
+	footerClasses.forEach(footerClass => footer.classList.add(footerClass));
+};
 
-	addFooterClasses();
-	footer.innerHTML = generateFooterHtml();
-})();
+addFooterClasses(footer);
+footer.innerHTML = generateFooterHtml();
