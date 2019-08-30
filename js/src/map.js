@@ -1,17 +1,17 @@
 // To initialize the Google map
-function initMap() {
+const initMap = () => {
 	const map = document.querySelector('.map');
 	const mapProps = {
 		center: new google.maps.LatLng(42, -100),
 		zoom: 3
 	};
 	return new google.maps.Map(map, mapProps);
-}
+};
 
 // Using IIFE to avoid clashes and interference with other scripts
-(function() {
+(() => {
 	// To add info windows to markers
-	function showInfoWindow(headquarters, worldMap) {
+	const showInfoWindow = (headquarters, worldMap) => {
 		const marker = new google.maps.Marker({
 			position: headquarters.position,
 			title: headquarters.company,
@@ -20,28 +20,37 @@ function initMap() {
 
 		const infoWindow = new google.maps.InfoWindow({
 			content: headquarters.infoText,
-			maxWidth: 300
+			maxWidth: 360
 		});
 
 		marker.addListener('click', function() {
 			infoWindow.open(worldMap, marker);
 		});
-	}
+	};
 
 	// To get info window HTML
-	function getContentString(company, description, imageUrl, link) {
-		const infoTemplate =
-			'<div class="info-window"><h4 class="mb-2">{#COMPANY#} Headquarters</h4><div class="info-content"><img class="img-fluid" src="{#IMAGE#}" alt="{#COMPANY#}" /><div><p>{#TEXT#}</p><a class="btn btn-link" href="{#LINK#}" target="_blank" rel="noreferrer noopener">Website&nbsp;<i class="fas fa-arrow-right"></i></a></div></div></div>';
+	const getContentString = (company, description, imageUrl, link) => {
+		const infoTemplate = `<div class="info-window">
+			<h4 class="mb-2">${company} Headquarters</h4>
+			<div class="info-content row">
+				<div class="col-md-6 mb-3 mb-md-0">
+					<img class="img-fluid" src="${imageUrl}" alt="${company}" />
+				</div>
+				<div class="col-md-6">
+					<p>${description}</p>
+					<a class="btn btn-link" href="${link}" target="_blank" rel="noreferrer noopener">
+						Website&nbsp;
+						<i class="fas fa-arrow-right"></i>
+					</a>
+				</div>
+			</div>
+		</div>`;
 
-		return infoTemplate
-			.replace(/{#COMPANY#}/g, company)
-			.replace(/{#TEXT#}/g, description)
-			.replace(/{#IMAGE#}/g, imageUrl)
-			.replace(/{#LINK#}/g, link);
-	}
+		return infoTemplate;
+	};
 
 	// To add markers
-	function showMarkers(worldMap) {
+	const showMarkers = worldMap => {
 		const headquartersList = [
 			{
 				company: 'IBM',
@@ -105,13 +114,13 @@ function initMap() {
 			}
 		];
 
-		headquartersList.forEach(function(headquarters) {
+		headquartersList.forEach(headquarters => {
 			showInfoWindow(headquarters, worldMap);
 		});
-	}
+	};
 
 	// Execute once page is loaded, i.e., the Google Maps API script is loaded
-	window.addEventListener('load', function() {
+	window.addEventListener('load', () => {
 		const worldMap = initMap();
 		showMarkers(worldMap);
 	});

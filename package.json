@@ -1,0 +1,32 @@
+{
+	"name": "assignment-1",
+	"version": "1.0.0",
+	"description": "Simple Bootstrap Website for Web Design and Programming G assignment",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "babel js/src -d js/dist"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/WalterVetrivel/wdp_assignment_1.git"
+	},
+	"keywords": [
+		"Bootstrap",
+		"HTML",
+		"CSS",
+		"JavaScript",
+		"Google",
+		"Maps"
+	],
+	"author": "Walter Vetrivel Selvakumar",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/WalterVetrivel/wdp_assignment_1/issues"
+	},
+	"homepage": "https://github.com/WalterVetrivel/wdp_assignment_1#readme",
+	"devDependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-preset-env": "^1.7.0"
+	}
+}
