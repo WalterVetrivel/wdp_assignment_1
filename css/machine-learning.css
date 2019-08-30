@@ -1,0 +1,88 @@
+.jumbotron {
+	background-color: #111111;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23180e18' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%231f0a1f' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%23250725' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%232c032c' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%23330033' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.company-link {
+	text-decoration: none !important;
+}
+
+.company {
+	background-position: center;
+	background-size: cover;
+	height: 12rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0.25rem 5rem rgba(0, 0, 0, 0.25);
+	color: #efefef;
+	transition: all 0.3s ease-in;
+}
+
+.company-link:hover .company {
+	transform: scale(1.02);
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+}
+
+#ibm {
+	background-image: linear-gradient(
+			to bottom right,
+			rgba(92, 37, 141, 0.75),
+			rgba(67, 137, 162, 0.75)
+		),
+		url(../img/ai.jpg);
+}
+
+#microsoft {
+	background-image: linear-gradient(
+			to bottom right,
+			rgba(192, 72, 72, 0.75),
+			rgba(72, 0, 72, 0.75)
+		),
+		url(../img/da.jpg);
+}
+
+#amazon {
+	background-image: linear-gradient(
+			to bottom right,
+			rgba(194, 21, 0, 0.75),
+			rgba(255, 195, 0, 0.75)
+		),
+		url(../img/dv.jpg);
+}
+
+#oracle {
+	background-image: linear-gradient(
+			to bottom right,
+			rgba(203, 53, 107, 0.75),
+			rgba(189, 63, 50, 0.75)
+		),
+		url(../img/pl.jpg);
+}
+
+#sas {
+	background-image: linear-gradient(
+			to bottom right,
+			rgba(255, 212, 82, 0.75),
+			rgba(84, 74, 125, 0.75)
+		),
+		url(../img/ml.jpg);
+}
+
+#google {
+	background-image: linear-gradient(
+			to bottom right,
+			rgba(236, 111, 102, 0.75),
+			rgba(243, 161, 131, 0.75)
+		),
+		url(../img/stats.jpg);
+}
+
+.video {
+	display: block;
+	width: 100%;
+	min-height: 480px;
+	max-height: auto;
+}
