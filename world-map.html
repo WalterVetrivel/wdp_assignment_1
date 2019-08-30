@@ -68,14 +68,40 @@
 		<!-- END HEADER -->
 
 		<!-- START MAIN -->
-		<main></main>
+		<main>
+			<!-- START MAP -->
+			<section id="map" class="p-0 m-0 container-fluid">
+				<div class="row p-0 m-0">
+					<div class="col-12 map"></div>
+				</div>
+			</section>
+			<!-- END MAP -->
+
+			<!-- START VIDEO -->
+			<section class="container-fluid p-0 m-0" id="video">
+				<div class="row p-0 m-0">
+					<div class="col-12 p-0 m-0">
+						<iframe
+							src="https://www.youtube.com/embed/8o44asJt8ZA"
+							frameborder="0"
+							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+							allowfullscreen
+							class="video"
+						></iframe>
+					</div>
+				</div>
+			</section>
+			<!-- END VIDEO -->
+		</main>
 		<!-- END MAIN -->
 
 		<!-- START FOOTER -->
 		<footer class="p-5 container-fluid footer bg-dark text-light">
 			<div class="row align-items-center">
 				<div class="col-md-6">
-					<a class="footer-link d-inline-block mb-2" href="contact-about.html">Contact Us</a>
+					<a class="footer-link d-inline-block mb-2" href="contact-about.html"
+						>Contact Us</a
+					>
 					<p>
 						<a href="#" class="footer-link">
 							<i class="fab fa-facebook-f"></i>
@@ -126,6 +152,13 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="https://kit.fontawesome.com/500f7098c8.js"></script>
+		<script src="js/map.js"></script>
+		<script
+			async
+			defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxwjV5cBjosqTeTGyTNWcAD0fXIUOIsx4&callback=initMap"
+			type="text/javascript"
+		></script>
 		<!-- END SCRIPTS -->
 	</body>
 </html>

@@ -1,0 +1,4 @@
+.jumbotron {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+		url(../img/data-visual-bg.jpg);
+}
