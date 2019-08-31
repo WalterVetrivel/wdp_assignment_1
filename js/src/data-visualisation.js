@@ -3,7 +3,7 @@
 
 	// To create a chart
 	const createChart = (title, type, data) => {
-		const ctx = document.getElementById('myChart').getContext('2d');
+		const ctx = document.getElementById('chart').getContext('2d');
 		new Chart(ctx, {
 			type: type,
 			data: data,
@@ -19,8 +19,16 @@
 				},
 				title: {
 					display: true,
-					text: title.toUpperCase()
-				}
+					text: title.toUpperCase(),
+					fontColor: '#333'
+				},
+				legend: {
+					display: true,
+					labels: {
+						fontColor: '#333'
+					}
+				},
+				maintainAspectRatio: false
 			}
 		});
 	};
@@ -51,7 +59,7 @@
 		// Populate data
 		for (key in row) {
 			if (!isNaN(row[key])) dataset.data.push(row[key]);
-			else dataset.label = row[key];
+			else dataset.label = row[key].toUpperCase();
 		}
 
 		return dataset;
