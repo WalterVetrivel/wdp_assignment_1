@@ -18,7 +18,7 @@
 
 	// To generate X axis labels
 	const generateLabels = row =>
-		Object.keys(row).slice(0, Object.keys(row).length - 1);
+		Object.keys(row).slice(1, Object.keys(row).length);
 
 	// To construct dataset from excel row
 	const constructDataset = row => {
