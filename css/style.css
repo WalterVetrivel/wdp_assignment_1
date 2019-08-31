@@ -4,6 +4,10 @@
 	box-sizing: border-box;
 }
 
+html {
+	font-size: 14px;
+}
+
 ::-webkit-scrollbar {
 	width: 8px;
 }
@@ -46,11 +50,15 @@ body {
 }
 
 .main-title {
-	font-size: 3rem;
+	font-size: 2rem;
 }
 
 .subtitle {
-	font-size: 1.4rem;
+	font-size: 1.2rem;
+}
+
+.footer-subtitle {
+	font-size: 1rem;
 }
 
 .footer-link {
@@ -62,4 +70,19 @@ body {
 
 .footer-link:hover {
 	color: #6610f2;
+	text-decoration: none;
+}
+
+@media only screen and (min-width: 992px) {
+	html {
+		font-size: 16px;
+	}
+
+	.main-title {
+		font-size: 2.5rem;
+	}
+
+	.subtitle {
+		font-size: 1.4rem;
+	}
 }

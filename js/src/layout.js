@@ -1,33 +1,35 @@
-// To add navbar
 (() => {
+	// To add navbar
 	// Selecting the navbar
 	const navbar = document.querySelector('nav');
+	const navItems = [
+		{
+			url: 'index.html',
+			label: 'Home'
+		},
+		{
+			url: 'machine-learning.html',
+			label: 'Machine Learning'
+		},
+		{
+			url: 'data-visualisation.html',
+			label: 'Data Visualisation'
+		},
+		{
+			url: 'world-map.html',
+			label: 'World Map'
+		},
+		{
+			url: 'contact-about.html',
+			label: 'Contact Us'
+		}
+	];
+
+	const socialIcons = ['fab fa-facebook-f', 'fab fa-twitter', 'fab fa-youtube'];
 
 	// Generating links
 	const generateNavItems = () => {
 		const location = window.location.href;
-		const navItems = [
-			{
-				url: 'index.html',
-				label: 'Home'
-			},
-			{
-				url: 'machine-learning.html',
-				label: 'Machine Learning'
-			},
-			{
-				url: 'data-visualisation.html',
-				label: 'Data Visualisation'
-			},
-			{
-				url: 'world-map.html',
-				label: 'World Map'
-			},
-			{
-				url: 'contact-about.html',
-				label: 'Contact Us'
-			}
-		];
 
 		// Generating links based on the navItems array
 		return navItems.reduce(
@@ -75,58 +77,74 @@
 
 	addNavbarClasses(navbar);
 	navbar.innerHTML = generateNavbarHtml();
-})();
 
-// To add footer
-(() => {
+	// To add footer
 	// Selecting the footer
 	const footer = document.querySelector('footer');
 
+	// To generate footer links
+	// Generating links based on the navItems array
+	const generateFooterLinks = () =>
+		navItems.reduce(
+			(navItemsHtml, navItem) =>
+				`${navItemsHtml}<li><a href="${navItem.url}" class="footer-link">${navItem.label}</a></li>`,
+			''
+		);
+
+	// To generate social links
+	// Generating links based on socialIcons array
+	const generateSocialLinks = () =>
+		socialIcons.reduce(
+			(
+				socialLinksHtml,
+				socialIcon
+			) => `${socialLinksHtml}<a href="#" class="footer-link">
+								<i class="${socialIcon}"></i>
+							</a>`,
+			''
+		);
+
 	// To generate footer HTML
 	const generateFooterHtml = () => {
-		return `<div class="row align-items-center">
-				<div class="col-md-6">
-					<a class="footer-link d-inline-block mb-2" href="contact-about.html"
-						>Contact Us</a
-					>
-					<p>
-						<a href="#" class="footer-link">
-							<i class="fab fa-facebook-f"></i>
-						</a>
-						<a href="#" class="footer-link">
-							<i class="fab fa-twitter"></i>
-						</a>
-						<a href="#" class="footer-link">
-							<i class="fab fa-youtube"></i>
-						</a>
-					</p>
+		return `<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h4 class="text-uppercase text-white-50 footer-subtitle">Site Map</h4>
+						<ul class="footer-links list-unstyled">
+							${generateFooterLinks()}
+						</ul>
+					</div>
+					<div class="col-md-6">
+						<h4 class="text-uppercase text-white-50 footer-subtitle">
+							Follow us on social media
+						</h4>
+						<p>
+							${generateSocialLinks()}
+						</p>
+					</div>
 				</div>
-				<div class="col-md-6">
-					<p class="footer-copyright">
-						Copyright &copy;
-						<a
-							href="https://walterselvakumar.com/"
-							target="_blank"
-							rel="noreferrer noopener"
-							class="footer-link"
-						>
-							Walter Vetrivel Selvakumar
-						</a>
-						${new Date().getFullYear()}. All rights reserved.
-					</p>
+				<hr class="border-top" />
+				<div class="row">
+					<div class="col-12 text-center">
+						<p class="mb-0">
+							Copyright &copy;
+							<a
+								href="https://walterselvakumar.com"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Walter Vetrivel Selvakumar
+							</a>
+							${new Date().getFullYear()}. All rights reserved.
+						</p>
+					</div>
 				</div>
 			</div>`;
 	};
 
 	// To add Bootstrap classes to footer
 	const addFooterClasses = footer => {
-		const footerClasses = [
-			'footer',
-			'container-fluid',
-			'p-5',
-			'bg-dark',
-			'text-light'
-		];
+		const footerClasses = ['footer', 'p-5', 'bg-dark', 'text-light'];
 		footerClasses.forEach(footerClass => footer.classList.add(footerClass));
 	};
 
