@@ -40,7 +40,26 @@
 		<!-- END HEADER -->
 
 		<!-- START MAIN -->
-		<main></main>
+		<main>
+			<div class="container p-5">
+				<div class="row">
+					<div class="col-12 mb-5">
+						<h3>Choose an excel file to visualise</h3>
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="customFile" />
+							<label class="custom-file-label" for="customFile">
+								Choose file
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<canvas id="myChart"></canvas>
+					</div>
+				</div>
+			</div>
+		</main>
 		<!-- END MAIN -->
 
 		<!-- START FOOTER -->
@@ -64,6 +83,13 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="https://kit.fontawesome.com/500f7098c8.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+			integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis="
+			crossorigin="anonymous"
+		></script>
+		<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+		<script src="js/dist/data-visualisation.js"></script>
 		<script src="js/dist/layout.js"></script>
 		<!-- END SCRIPTS -->
 	</body>
