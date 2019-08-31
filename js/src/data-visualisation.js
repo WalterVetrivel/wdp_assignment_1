@@ -1,10 +1,11 @@
 (() => {
 	const fileUpload = document.querySelector('.custom-file-input');
+	let chart = null;
 
 	// To create a chart
 	const createChart = (title, type, data) => {
 		const ctx = document.getElementById('chart').getContext('2d');
-		new Chart(ctx, {
+		return new Chart(ctx, {
 			type: type,
 			data: data,
 			options: {
@@ -90,7 +91,9 @@
 
 		const chartData = generateChartData(sheetData);
 
-		createChart(sheetName, 'line', chartData);
+		if (chart) chart.destroy();
+
+		chart = createChart(sheetName, 'line', chartData);
 	};
 
 	// To read data from excel file

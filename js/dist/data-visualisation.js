@@ -1,10 +1,11 @@
 (function () {
 	var fileUpload = document.querySelector('.custom-file-input');
+	var chart = null;
 
 	// To create a chart
 	var createChart = function createChart(title, type, data) {
 		var ctx = document.getElementById('chart').getContext('2d');
-		new Chart(ctx, {
+		return new Chart(ctx, {
 			type: type,
 			data: data,
 			options: {
@@ -92,7 +93,9 @@
 
 		var chartData = generateChartData(sheetData);
 
-		createChart(sheetName, 'line', chartData);
+		if (chart) chart.destroy();
+
+		chart = createChart(sheetName, 'line', chartData);
 	};
 
 	// To read data from excel file
