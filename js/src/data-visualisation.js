@@ -1,38 +1,14 @@
 (() => {
-	const fileUpload = document.querySelector('.custom-file-input');
-	let chart = null;
-
-	// To create a chart
-	const createChart = (title, type, data) => {
-		const ctx = document.getElementById('chart').getContext('2d');
-		return new Chart(ctx, {
-			type: type,
-			data: data,
-			options: {
-				scales: {
-					yAxes: [
-						{
-							ticks: {
-								beginAtZero: true
-							}
-						}
-					]
-				},
-				title: {
-					display: true,
-					text: title.toUpperCase(),
-					fontColor: '#333'
-				},
-				legend: {
-					display: true,
-					labels: {
-						fontColor: '#333'
-					}
-				},
-				maintainAspectRatio: false
-			}
-		});
+	// Variable declaration and definition
+	const chartObj = {
+		chart: null,
+		title: '',
+		type: 'line',
+		data: null
 	};
+	const fileUpload = document.querySelector('.custom-file-input');
+	const chartTypeSelect = document.querySelector('#chartType');
+	const fileNameSpan = document.querySelector('.file-name');
 
 	// Random number generator for RGB colors
 	const rand = () => Math.round(Math.random() * 200);
@@ -80,6 +56,44 @@
 		return chartData;
 	};
 
+	// To create a chart
+	const createChart = (title, type, data) => {
+		const ctx = document.getElementById('chart').getContext('2d');
+		return new Chart(ctx, {
+			type: type,
+			data: data,
+			options: {
+				scales: {
+					yAxes: [
+						{
+							ticks: {
+								beginAtZero: true
+							}
+						}
+					]
+				},
+				title: {
+					display: true,
+					text: title.toUpperCase(),
+					fontColor: '#333'
+				},
+				legend: {
+					display: true,
+					labels: {
+						fontColor: '#333'
+					}
+				},
+				maintainAspectRatio: false
+			}
+		});
+	};
+
+	// To draw a new chart
+	const drawChart = ({chart, title, type, data}) => {
+		if (chart) chart.destroy();
+		chartObj.chart = createChart(title, type, data);
+	};
+
 	// To process the read excel file
 	const onReaderLoaded = e => {
 		try {
@@ -92,9 +106,9 @@
 
 			const chartData = generateChartData(sheetData);
 
-			if (chart) chart.destroy();
-
-			chart = createChart(sheetName, 'line', chartData);
+			chartObj.title = sheetName;
+			chartObj.data = chartData;
+			drawChart(chartObj);
 		} catch (err) {
 			alert('Invalid file. Please upload an excel file with .xlsx extension.');
 		}
@@ -102,6 +116,11 @@
 
 	// To validate file extension
 	const isFileValid = file => (file.name.indexOf('.xls') !== -1 ? true : false);
+
+	// To show selected file name
+	const showFileName = (fileName, container) => {
+		container.innerText = fileName;
+	};
 
 	// To read data from excel file
 	const readExcel = e => {
@@ -112,6 +131,9 @@
 
 			// Check if file is valid
 			if (isFileValid(file)) {
+				// Display file name on DOM
+				showFileName(file.name, fileNameSpan);
+
 				// Read and process the uploaded file
 				const reader = new FileReader();
 				reader.onload = onReaderLoaded;
@@ -124,5 +146,12 @@
 		}
 	};
 
+	// To change chart type
+	const changeChartType = e => {
+		chartObj.type = e.target.value;
+		drawChart(chartObj);
+	};
+
 	fileUpload.addEventListener('change', readExcel);
+	chartTypeSelect.addEventListener('change', changeChartType);
 })();

@@ -1,36 +1,14 @@
 (function () {
-	var fileUpload = document.querySelector('.custom-file-input');
-	var chart = null;
-
-	// To create a chart
-	var createChart = function createChart(title, type, data) {
-		var ctx = document.getElementById('chart').getContext('2d');
-		return new Chart(ctx, {
-			type: type,
-			data: data,
-			options: {
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero: true
-						}
-					}]
-				},
-				title: {
-					display: true,
-					text: title.toUpperCase(),
-					fontColor: '#333'
-				},
-				legend: {
-					display: true,
-					labels: {
-						fontColor: '#333'
-					}
-				},
-				maintainAspectRatio: false
-			}
-		});
+	// Variable declaration and definition
+	var chartObj = {
+		chart: null,
+		title: '',
+		type: 'line',
+		data: null
 	};
+	var fileUpload = document.querySelector('.custom-file-input');
+	var chartTypeSelect = document.querySelector('#chartType');
+	var fileNameSpan = document.querySelector('.file-name');
 
 	// Random number generator for RGB colors
 	var rand = function rand() {
@@ -82,6 +60,47 @@
 		return chartData;
 	};
 
+	// To create a chart
+	var createChart = function createChart(title, type, data) {
+		var ctx = document.getElementById('chart').getContext('2d');
+		return new Chart(ctx, {
+			type: type,
+			data: data,
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				title: {
+					display: true,
+					text: title.toUpperCase(),
+					fontColor: '#333'
+				},
+				legend: {
+					display: true,
+					labels: {
+						fontColor: '#333'
+					}
+				},
+				maintainAspectRatio: false
+			}
+		});
+	};
+
+	// To draw a new chart
+	var drawChart = function drawChart(_ref) {
+		var chart = _ref.chart,
+		    title = _ref.title,
+		    type = _ref.type,
+		    data = _ref.data;
+
+		if (chart) chart.destroy();
+		chartObj.chart = createChart(title, type, data);
+	};
+
 	// To process the read excel file
 	var onReaderLoaded = function onReaderLoaded(e) {
 		try {
@@ -94,9 +113,9 @@
 
 			var chartData = generateChartData(sheetData);
 
-			if (chart) chart.destroy();
-
-			chart = createChart(sheetName, 'line', chartData);
+			chartObj.title = sheetName;
+			chartObj.data = chartData;
+			drawChart(chartObj);
 		} catch (err) {
 			alert('Invalid file. Please upload an excel file with .xlsx extension.');
 		}
@@ -105,6 +124,11 @@
 	// To validate file extension
 	var isFileValid = function isFileValid(file) {
 		return file.name.indexOf('.xls') !== -1 ? true : false;
+	};
+
+	// To show selected file name
+	var showFileName = function showFileName(fileName, container) {
+		container.innerText = fileName;
 	};
 
 	// To read data from excel file
@@ -116,6 +140,9 @@
 
 			// Check if file is valid
 			if (isFileValid(file)) {
+				// Display file name on DOM
+				showFileName(file.name, fileNameSpan);
+
 				// Read and process the uploaded file
 				var reader = new FileReader();
 				reader.onload = onReaderLoaded;
@@ -128,5 +155,12 @@
 		}
 	};
 
+	// To change chart type
+	var changeChartType = function changeChartType(e) {
+		chartObj.type = e.target.value;
+		drawChart(chartObj);
+	};
+
 	fileUpload.addEventListener('change', readExcel);
+	chartTypeSelect.addEventListener('change', changeChartType);
 })();
