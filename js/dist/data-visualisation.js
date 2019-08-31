@@ -84,30 +84,48 @@
 
 	// To process the read excel file
 	var onReaderLoaded = function onReaderLoaded(e) {
-		var data = new Uint8Array(e.target.result);
-		var workbook = XLSX.read(data, { type: 'array' });
+		try {
+			var data = new Uint8Array(e.target.result);
+			var workbook = XLSX.read(data, { type: 'array' });
 
-		var sheetName = workbook.SheetNames[0];
-		var sheet = workbook.Sheets[sheetName];
-		var sheetData = XLSX.utils.sheet_to_json(sheet);
+			var sheetName = workbook.SheetNames[0];
+			var sheet = workbook.Sheets[sheetName];
+			var sheetData = XLSX.utils.sheet_to_json(sheet);
 
-		var chartData = generateChartData(sheetData);
+			var chartData = generateChartData(sheetData);
 
-		if (chart) chart.destroy();
+			if (chart) chart.destroy();
 
-		chart = createChart(sheetName, 'line', chartData);
+			chart = createChart(sheetName, 'line', chartData);
+		} catch (err) {
+			alert('Invalid file. Please upload an excel file with .xlsx extension.');
+		}
+	};
+
+	// To validate file extension
+	var isFileValid = function isFileValid(file) {
+		return file.name.indexOf('.xls') !== -1 ? true : false;
 	};
 
 	// To read data from excel file
 	var readExcel = function readExcel(e) {
-		// Get the uploaded file
-		var files = e.target.files;
-		var file = files[0];
+		try {
+			// Get the uploaded file
+			var files = e.target.files;
+			var file = files[0];
 
-		// Read and process the uploaded file
-		var reader = new FileReader();
-		reader.onload = onReaderLoaded;
-		reader.readAsArrayBuffer(file);
+			// Check if file is valid
+			if (isFileValid(file)) {
+				// Read and process the uploaded file
+				var reader = new FileReader();
+				reader.onload = onReaderLoaded;
+				reader.readAsArrayBuffer(file);
+			} else {
+				throw new Error('Invalid file extension.');
+			}
+		} catch (err) {
+			alert('Invalid file. Please upload an excel file with .xlsx extension.');
+		}
 	};
 
 	fileUpload.addEventListener('change', readExcel);
