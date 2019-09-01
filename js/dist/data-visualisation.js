@@ -9,6 +9,7 @@
 	var fileUpload = document.querySelector('.custom-file-input');
 	var chartTypeSelect = document.querySelector('#chartType');
 	var fileNameSpan = document.querySelector('.file-name');
+	var ctx = document.getElementById('chart').getContext('2d');
 
 	// Random number generator for RGB colors
 	var rand = function rand() {
@@ -61,8 +62,7 @@
 	};
 
 	// To create a chart
-	var createChart = function createChart(title, type, data) {
-		var ctx = document.getElementById('chart').getContext('2d');
+	var createChart = function createChart(ctx, title, type, data) {
 		return new Chart(ctx, {
 			type: type,
 			data: data,
@@ -91,14 +91,14 @@
 	};
 
 	// To draw a new chart
-	var drawChart = function drawChart(_ref) {
+	var drawChart = function drawChart(_ref, ctx) {
 		var chart = _ref.chart,
 		    title = _ref.title,
 		    type = _ref.type,
 		    data = _ref.data;
 
 		if (chart) chart.destroy();
-		chartObj.chart = createChart(title, type, data);
+		chartObj.chart = createChart(ctx, title, type, data);
 	};
 
 	// To process the read excel file
@@ -115,7 +115,7 @@
 
 			chartObj.title = sheetName;
 			chartObj.data = chartData;
-			drawChart(chartObj);
+			drawChart(chartObj, ctx);
 		} catch (err) {
 			alert('Invalid file. Please upload an excel file with .xlsx extension.');
 		}
@@ -158,7 +158,7 @@
 	// To change chart type
 	var changeChartType = function changeChartType(e) {
 		chartObj.type = e.target.value;
-		drawChart(chartObj);
+		drawChart(chartObj, ctx);
 	};
 
 	fileUpload.addEventListener('change', readExcel);

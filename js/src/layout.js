@@ -1,7 +1,5 @@
 (() => {
-	// To add navbar
-	// Selecting the navbar
-	const navbar = document.querySelector('nav');
+	// Variable declaration and definition
 	const navItems = [
 		{
 			url: 'index.html',
@@ -24,11 +22,21 @@
 			label: 'Contact Us'
 		}
 	];
-
+	const navbarClasses = [
+		'navbar',
+		'navbar-expand-lg',
+		'navbar-dark',
+		'bg-primary'
+	];
+	const footerClasses = ['footer', 'p-5', 'bg-dark', 'text-light'];
 	const socialIcons = ['fab fa-facebook-f', 'fab fa-twitter', 'fab fa-youtube'];
 
+	// To add navbar
+	// Selecting the navbar
+	const navbar = document.querySelector('nav');
+
 	// Generating links
-	const generateNavItems = () => {
+	const generateNavItems = navItems => {
 		const location = window.location.href;
 
 		// Generating links based on the navItems array
@@ -42,7 +50,7 @@
 	};
 
 	// Generating the overall HTML of navbar
-	const generateNavbarHtml = () => {
+	const generateNavbarHtml = navItems => {
 		const navbarHtml = `<a href="index.html" class="navbar-brand">Data Science</a>
 		<button
 			class="navbar-toggler"
@@ -57,7 +65,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navItems">
 			<ul class="navbar-nav ml-auto">
-				${generateNavItems()}
+				${generateNavItems(navItems)}
 			</ul>
 		</div>`;
 
@@ -65,18 +73,12 @@
 	};
 
 	// Adding Bootstrap classes to navbar
-	const addNavbarClasses = navbar => {
-		const navbarClasses = [
-			'navbar',
-			'navbar-expand-lg',
-			'navbar-dark',
-			'bg-primary'
-		];
+	const addNavbarClasses = (navbar, navbarClasses) => {
 		navbarClasses.forEach(navbarClass => navbar.classList.add(navbarClass));
 	};
 
-	addNavbarClasses(navbar);
-	navbar.innerHTML = generateNavbarHtml();
+	addNavbarClasses(navbar, navbarClasses);
+	navbar.innerHTML = generateNavbarHtml(navItems);
 
 	// To add footer
 	// Selecting the footer
@@ -84,7 +86,7 @@
 
 	// To generate footer links
 	// Generating links based on the navItems array
-	const generateFooterLinks = () =>
+	const generateFooterLinks = navItems =>
 		navItems.reduce(
 			(navItemsHtml, navItem) =>
 				`${navItemsHtml}<li><a href="${navItem.url}" class="footer-link">${navItem.label}</a></li>`,
@@ -93,7 +95,7 @@
 
 	// To generate social links
 	// Generating links based on socialIcons array
-	const generateSocialLinks = () =>
+	const generateSocialLinks = socialIcons =>
 		socialIcons.reduce(
 			(
 				socialLinksHtml,
@@ -105,13 +107,13 @@
 		);
 
 	// To generate footer HTML
-	const generateFooterHtml = () => {
+	const generateFooterHtml = (navItems, socialIcons) => {
 		return `<div class="container">
 				<div class="row">
 					<div class="col-md-6">
 						<h4 class="text-uppercase text-white-50 footer-subtitle">Site Map</h4>
 						<ul class="footer-links list-unstyled">
-							${generateFooterLinks()}
+							${generateFooterLinks(navItems)}
 						</ul>
 					</div>
 					<div class="col-md-6">
@@ -119,7 +121,7 @@
 							Follow us on social media
 						</h4>
 						<p>
-							${generateSocialLinks()}
+							${generateSocialLinks(socialIcons)}
 						</p>
 					</div>
 				</div>
@@ -143,11 +145,10 @@
 	};
 
 	// To add Bootstrap classes to footer
-	const addFooterClasses = footer => {
-		const footerClasses = ['footer', 'p-5', 'bg-dark', 'text-light'];
+	const addFooterClasses = (footer, footerClasses) => {
 		footerClasses.forEach(footerClass => footer.classList.add(footerClass));
 	};
 
-	addFooterClasses(footer);
-	footer.innerHTML = generateFooterHtml();
+	addFooterClasses(footer, footerClasses);
+	footer.innerHTML = generateFooterHtml(navItems, socialIcons);
 })();
